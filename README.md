@@ -29,8 +29,8 @@ Ce projet est une application Flask instrumentée avec des métriques Prometheus
 1. **Cloner le dépôt**
 
 ```bash
-git clone <url-du-depot>
-cd <nom-du-dossier>
+git clone https://github.com/nabilainas/monitoring-app.git
+cd monitoring-app
 ```
 
 1. **Cloner le dépôt**
