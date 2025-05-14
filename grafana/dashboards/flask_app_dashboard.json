@@ -1,0 +1,201 @@
+{
+  "id": null,
+  "title": "Flask App Metrics Dashboard",
+  "tags": ["flask", "prometheus", "metrics"],
+  "timezone": "browser",
+  "schemaVersion": 30,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Cell Counter (Gauge)",
+      "id": 1,
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "cell_counter",
+          "legendFormat": "{{environment}}",
+          "refId": "A"
+        }
+      ],
+      "xaxis": { "mode": "time" },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": "Count",
+          "logBase": 1,
+          "min": 0
+        },
+        { "show": false }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
+    },
+    {
+      "type": "stat",
+      "title": "Checkpoint Operations Total",
+      "id": 2,
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "checkpoint_operations_total",
+          "legendFormat": "{{environment}}",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "color": { "mode": "thresholds" }
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
+    },
+    {
+      "type": "stat",
+      "title": "Restore Operations Total",
+      "id": 3,
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "restore_operations_total",
+          "legendFormat": "{{environment}}",
+          "refId": "C"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "color": { "mode": "thresholds" }
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 }
+    },
+    {
+      "type": "gauge",
+      "title": "Counter Value at Checkpoint",
+      "id": 4,
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "checkpoint_counter_value",
+          "legendFormat": "{{environment}}",
+          "refId": "D"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "max": 1000,
+          "unit": "none",
+          "color": {
+            "mode": "palette-classic"
+          }
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 }
+    },
+    {
+      "type": "gauge",
+      "title": "Counter Value at Restore",
+      "id": 5,
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "restore_counter_value",
+          "legendFormat": "{{environment}}",
+          "refId": "E"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "max": 1000,
+          "unit": "none",
+          "color": {
+            "mode": "palette-classic"
+          }
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 }
+    },
+    {
+      "type": "graph",
+      "title": "HTTP Requests Total",
+      "id": 6,
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "sum by (method, endpoint) (http_requests_total)",
+          "legendFormat": "{{method}} {{endpoint}}",
+          "refId": "F"
+        }
+      ],
+      "xaxis": { "mode": "time" },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": "Requests",
+          "logBase": 1,
+          "min": 0
+        },
+        { "show": false }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 }
+    },
+    {
+      "type": "graph",
+      "title": "HTTP Errors Total",
+      "id": 7,
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "sum by (endpoint) (http_errors_total)",
+          "legendFormat": "{{endpoint}}",
+          "refId": "G"
+        }
+      ],
+      "xaxis": { "mode": "time" },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": "Errors",
+          "logBase": 1,
+          "min": 0
+        },
+        { "show": false }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 24 }
+    },
+    {
+      "type": "graph",
+      "title": "Request Latency (95th percentile)",
+      "id": 8,
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_latency_seconds_bucket[5m])) by (le, endpoint))",
+          "legendFormat": "{{endpoint}}",
+          "refId": "H"
+        }
+      ],
+      "xaxis": { "mode": "time" },
+      "yaxes": [
+        {
+          "format": "s",
+          "label": "Latency (seconds)",
+          "logBase": 1,
+          "min": 0
+        },
+        { "show": false }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 24 }
+    }
+  ],
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": []
+  }
+}
