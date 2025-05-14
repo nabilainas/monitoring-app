@@ -33,7 +33,7 @@ git clone https://github.com/nabilainas/monitoring-app.git
 cd monitoring-app
 ```
 
-1. **Cloner le dépôt**
+1. **Lancer les applications**
 
 ```bash
 docker-compose up --build
