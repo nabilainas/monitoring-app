@@ -60,6 +60,39 @@ docker-compose up --build
    - Les requêtes HTTP totales et erreurs.
    - La latence des requêtes (95e percentile).
 
+6. **Testing Endpoints**
+
+Afin d'ajouter des données au compteur on peut lancer :
+```bash
+curl http://localhost:8080/
+```
+On aura des réponses type:
+```json
+{"counter":35}
+```
+
+On peut ensuite créer un checkpoint avec :
+```bash
+curl -s -X POST http://localhost:8080/checkpoint
+```
+On aura une réponses type:
+```json
+{"counter":35,"status":"checkpoint saved"}
+```
+
+On a ensuite la possibilité de faire un restore avec:
+```bash
+curl -s -X POST http://localhost:8080/restore
+```
+On aura une réponses type:
+```json
+{"counter":35,"status":"restored"}
+```
+
+## Dashboard 
+
+![dashboard](./assets/dashboard.png)
+
 ---
 
 ## Endpoints API
